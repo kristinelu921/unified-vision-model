@@ -468,7 +468,8 @@ class LruCacheWithCleanup(Generic[K_type, T_type]):
         assert self.max_size is None or len(self._cache) < self.max_size
         # logger.debug(f"Creating an object for {key}")
         value = self.create_fn(key)
-        self._cache[key] = value
+        if not ((self.max_size is not None) and (self.max_size <= 0)):
+            self._cache[key] = value
         return value
 
     def cleanup_all(self) -> None:
