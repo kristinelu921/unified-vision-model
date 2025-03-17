@@ -2,7 +2,7 @@ from entity_seg_semantic import load_data, sanity_check
 
 
 def one_pass():
-    ds_dir = '/mnt/klum/entityseg/entityseg_semantic_tfds/'
+    ds_dir = 'gs://kmh-gcp-asia-northeast1-b/kristine/lvm/entityseg_segmentation_tfds' #'/mnt/klum/entityseg/entityseg_semantic_tfds/'
     ds = load_data(data_dir=ds_dir, split='train', batch_size=64, repeat=False, shuffle=False)
     sanity_check(ds_dir, 'train', num_batches=5)
     with open('single_pass_thru.txt', 'w') as f:

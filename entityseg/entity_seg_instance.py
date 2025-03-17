@@ -218,12 +218,21 @@ def load_data(
     repeat: bool = True,
     shuffle: bool = True,
     shuffle_buffer: int = 256,
+    *,
+    ignore_errors: bool = False,
 ):
+    """If ``ignore_errors`` is True, skip examples that fail in the pipeline (e.g. bad image bytes).
+
+    Decoding runs inside TensorFlow graphs; use this instead of a Python ``try``/``except``
+    around the iterator.
+    """
     kw: dict = {"split": split}
     if data_dir is not None:
         kw["data_dir"] = data_dir
     ds = tfds.load("entity_seg_instance", **kw)
     ds = ds.map(preprocess_func, num_parallel_calls=tf.data.AUTOTUNE)
+    if ignore_errors:
+        ds = ds.ignore_errors()
     if shuffle:
         ds = ds.shuffle(shuffle_buffer)
     if repeat:
@@ -234,7 +243,6 @@ def load_data(
 def preprocess_func(example):
     image = tf.cast(example["image"], tf.float32)
     mask = tf.cast(example["instance"]["mask_raster"], tf.float32)
-
     h = tf.cast(tf.shape(image)[0], tf.float32)
     w = tf.cast(tf.shape(image)[1], tf.float32)
     x_scale = 256.0 / w
@@ -274,14 +282,19 @@ def sanity_check(
     batch_size: int = 4,
     shuffle: bool = False,
     max_show: int = 4,
+    *,
+    ignore_errors: bool = True,
 ):
-    """Load a few batches and save a figure per batch: RGB | ``mask_raster`` | overlay + bbox."""
+    """Load a few batches and save a figure per batch: RGB | ``mask_raster`` | overlay + bbox.
+
+    """
     ds = load_data(
         data_dir=ds_dir,
         split=split,
         batch_size=batch_size,
         repeat=False,
         shuffle=shuffle,
+        ignore_errors=ignore_errors,
     )
     ds = ds.take(num_batches)
 
