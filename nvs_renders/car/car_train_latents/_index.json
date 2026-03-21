@@ -1,0 +1,13 @@
+{
+  "dataset_name": "UCO3DCar",
+  "split": "train",
+  "data_dir": "/kmh-nfs-ssd-us-mount/code/kristine/lvm/uco3d_car_tfds",
+  "output_dir": "/kmh-nfs-ssd-us-mount/code/kristine/lvm/uco3d_car_train_latents",
+  "vae_weights": "/kmh-nfs-ssd-us-mount/data/xtiange/jax_weights/4B/jflux2_vae.safetensors",
+  "vae_config": "/kmh-nfs-ssd-us-mount/data/xtiange/hf_cache/vae/config.json",
+  "device": "tpu",
+  "batch_size": 64,
+  "count_total": 900,
+  "count_written": 900,
+  "count_skipped_existing": 0
+}

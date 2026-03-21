@@ -1,0 +1,28 @@
+{
+  "seq_dir": "/root/splat/27-92237-65486",
+  "gaussian_splats_dir": "/root/splat/27-92237-65486/gaussian_splats",
+  "num_views": 1000,
+  "origin": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "source_center_shift_applied": [
+    -0.40674781799316406,
+    1.2305880784988403,
+    1.180289626121521
+  ],
+  "radius_percentile": 99.5,
+  "object_radius": 0.7236534357070923,
+  "camera_radius": 2.496604353189468,
+  "distance_min": 2.4966042041778564,
+  "distance_max": 2.4966046810150146,
+  "distance_std": 4.345239925344283e-08,
+  "camera_y_min": -1.0,
+  "camera_y_max": -0.35,
+  "background": "white",
+  "supersample": 1,
+  "prune_opacity_q": 0.0,
+  "prune_max_scale_q": 1.0,
+  "device": "cuda:0"
+}
