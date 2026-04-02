@@ -1,0 +1,45 @@
+INFO[build.py]: Loading dataset entityseg/entity_seg_semantic.py from path: /kmh-nfs-ssd-us-mount/code/kristine/lvm/entityseg/entity_seg_semantic.py
+WARNING[file_utils.py]: Variant folder /mnt/klum/entityseg/entityseg_semantic_tfds/entity_seg_semantic/1.0.1 has no dataset_info.json
+INFO[cli_utils.py]: download_and_prepare for dataset entity_seg_semantic/1.0.1...
+INFO[dataset_builder.py]: Generating dataset entity_seg_semantic (/mnt/klum/entityseg/entityseg_semantic_tfds/entity_seg_semantic/1.0.1)
+Downloading and preparing dataset Unknown size (download: Unknown size, generated: Unknown size, total: Unknown size) to /mnt/klum/entityseg/entityseg_semantic_tfds/entity_seg_semantic/1.0.1...
+INFO[writer.py]: Done writing /mnt/klum/entityseg/entityseg_semantic_tfds/entity_seg_semantic/incomplete.AJS72W_1.0.1/entity_seg_semantic-train.tfrecord*. Number of examples: 666 (shards: [166, 167, 167, 166])
+INFO[writer.py]: Done writing /mnt/klum/entityseg/entityseg_semantic_tfds/entity_seg_semantic/incomplete.AJS72W_1.0.1/entity_seg_semantic-validation.tfrecord*. Number of examples: 98 (shards: [98])
+Dataset entity_seg_semantic downloaded and prepared to /mnt/klum/entityseg/entityseg_semantic_tfds/entity_seg_semantic/1.0.1. Subsequent calls will reuse this data.
+INFO[cli_utils.py]: Dataset generation complete...
+
+tfds.core.DatasetInfo(
+    name='entity_seg_semantic',
+    full_name='entity_seg_semantic/1.0.1',
+    description="""
+    EntitySeg semantic segmentation: RGB + one per-pixel class map (PNG) per image.
+    """,
+    homepage='https://arxiv.org/abs/2211.05776',
+    data_dir='/mnt/klum/entityseg/entityseg_semantic_tfds/entity_seg_semantic/1.0.1',
+    file_format=tfrecord,
+    download_size=Unknown size,
+    dataset_size=401.24 MiB,
+    features=FeaturesDict({
+        'image': Image(shape=(None, None, 3), dtype=uint8),
+        'mask': Tensor(shape=(None, None, 3), dtype=uint8, description=Class id in channel 0; channels 1–2 are zero.),
+        'mask_valid': bool,
+        'metadata': FeaturesDict({
+            'file_name': Text(shape=(), dtype=string),
+            'height': int32,
+            'index': int64,
+            'list_path': Text(shape=(), dtype=string),
+            'mask_file': Text(shape=(), dtype=string),
+            'rel_image_path': Text(shape=(), dtype=string),
+            'width': int32,
+        }),
+    }),
+    supervised_keys=('image', 'mask'),
+    disable_shuffling=False,
+    nondeterministic_order=False,
+    splits={
+        'train': <SplitInfo num_examples=666, num_shards=4>,
+        'validation': <SplitInfo num_examples=98, num_shards=1>,
+    },
+    citation="""""",
+)
+

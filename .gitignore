@@ -2,3 +2,5 @@
 *.zip
 *.jpg
 *_tfds*
+*.json
+.hf-cache/

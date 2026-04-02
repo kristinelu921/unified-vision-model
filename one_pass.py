@@ -1,20 +1,55 @@
-from uco3d_motor import load_data, sanity_check
+from d3.d3_normal import load_data, sanity_check
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 def one_pass():
-    ds_dir = '/kmh-nfs-ssd-us-mount/code/kristine/lvm/uco3d_motor_tfds' #OR: if using a DIFFERENT ZONE (not us-central2), use '/mnt/klum/data'  (after you run the warmup script), see commands.txt for example
+    ds_dir = "gs://kmh-gcp-us-central2/kristine/lvm/d3_normal_tfds"
 
-    sanity_check(ds_dir, 'train', num_batches = 1) # first sanity check to ensure the dataset is loading correctly
+    # d3_normal: train skips sorted index % 10 == 0; validation is only those rows. Your file may exist only in validation.
+    sanity_check(ds_dir, "train", num_batches=1, batch_size=8)
 
-    ds = load_data(data_dir=ds_dir, split='train', batch_size=64, repeat=False, shuffle=False) #outputs the dataset in batches of 64 image-mask pairs (64, 256, 256, 3)
+    target_substring = "train_ai_007_010_cam_00_fr0084.png"
 
-    with open('/kmh-nfs-ssd-us-mount/code/kristine/lvm/single_pass_thru.txt', 'w') as f:
-        pass
-    for i, (images, masks, image_latents, mask_latents, metadata) in enumerate(ds):
-        # will loop through the entire dataset once, writing out the shape of each batch of image-mask pairs. images is a (64, 256, 256, 3) tensor, masks is a (64, 256, 256, 3) tensor.
-        
-        with open('/kmh-nfs-ssd-us-mount/code/kristine/lvm/single_pass_thru.txt', 'a') as f: #current command: write out the files
-            f.write(f"{i}, {images.shape}, {masks.shape}, {image_latents.shape}, {mask_latents.shape}, {metadata}\n")
-        ### FILL IN COMMANDS HERE ###
+    for split in ("train", "validation"):
+        ds = load_data(data_dir=ds_dir, split=split, batch_size=1, repeat=False, shuffle=False)
+        for i, batch in enumerate(ds):
+            if i > 500_000:
+                break
+            p = batch["metadata"]["rgb_path"][0]
+            if hasattr(p, "numpy"):
+                p = p.numpy()
+            if isinstance(p, (bytes, np.bytes_)):
+                p = p.decode("utf-8", errors="replace")
+            else:
+                p = str(p)
+            s = batch["metadata"]["stem"][0]
+            if hasattr(s, "numpy"):
+                s = s.numpy()
+            if isinstance(s, (bytes, np.bytes_)):
+                s = s.decode("utf-8", errors="replace")
+            else:
+                s = str(s)
+            if target_substring not in p and target_substring not in s:
+                continue
+            print(f"Found in split={split!r} path={p!r} stem={s!r}")
+            rgb = batch["image"].numpy()[0]
+            mask = batch["mask"].numpy()[0]
+            fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+            ax[0].imshow(np.clip(rgb, 0, 255).astype(np.uint8))
+            ax[0].axis("off")
+            ax[1].imshow(np.clip(mask.astype(np.float32) / 255.0, 0, 1))
+            ax[1].axis("off")
+            plt.tight_layout()
+            plt.savefig("one_pass_normal.png", dpi=150, bbox_inches="tight")
+            plt.close()
+            print("Saved one_pass_normal.png")
+            sanity_check(ds_dir, split, num_batches=1, batch_size=8)
+            return
 
-if __name__ == '__main__':
+    print("Not found in train or validation. Confirm the file is under rgb/ in the source tree used to build this TFDS, and that normal/<stem>.h5 exists.")
+    sanity_check(ds_dir, "train", num_batches=1, batch_size=8)
+
+
+if __name__ == "__main__":
     one_pass()

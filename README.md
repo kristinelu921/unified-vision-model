@@ -16,9 +16,8 @@ The dataset is described in our paper ["UnCommon Objects in 3D"](https://arxiv.o
 <img src="./uco3d_grid.gif" width="600" alt="grid"/>
 </center>
 
-## Updates
+## Updates:
 - Now the uCO3D dataset is also available on [hugging face](https://huggingface.co/datasets/facebook/uco3d)!
-
 
 ## Main features
 - **170,000 videos** scanning diverse objects from all directions.
@@ -45,6 +44,15 @@ Then run the download script (make sure to change `<DESTINATION_FOLDER>`):
 
 ```bash
 python dataset_download/download_dataset.py --download_folder <DESTINATION_FOLDER> --checksum_check
+```
+
+Option2: Using the standard download script with HuggingFace option
+You can also use the original download script with the HuggingFace option:
+
+```bash
+python dataset_download/download_dataset.py \
+  --download_folder <DESTINATION_FOLDER> \
+  --use_huggingface
 ```
 
 ## Download a small subset of the dataset
