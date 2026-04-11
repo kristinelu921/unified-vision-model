@@ -236,15 +236,20 @@ def sanity_check(
     shuffle=False,
     max_show=4,
     masks_from_json=True,
+    dataset_name: str = "lvis",
 ):
     """Visualize full-resolution RGB, decoded instance masks, and overlay (masks from LVIS JSON).
 
     TFDS does not store segmentations; masks are decoded from the same JSON as the builder
     (``LVIS_TRAIN_JSON`` / ``LVIS_VAL_JSON``) keyed by ``image_id``. Requires **pycocotools**.
     Set ``masks_from_json=False`` to only draw bounding boxes (no JSON load).
+    ``dataset_name`` must match what is under ``data_dir`` (e.g. ``\"lvis\"`` or ``\"lvis_car\"``);
+    loading the wrong name makes TFDS think the dataset is missing and can trigger a rebuild.
     """
     n_take = num_batches * batch_size
-    ds = tfds.load("lvis", split=split, data_dir=ds_dir, shuffle_files=shuffle)
+    ds = tfds.load(
+        dataset_name, split=split, data_dir=ds_dir, shuffle_files=shuffle
+    )
     ds = ds.take(n_take)
 
     json_path = TRAIN_JSON if split == "train" else VAL_JSON
@@ -341,7 +346,7 @@ def sanity_check(
 
         plt.tight_layout()
         date_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        out_path = f"lvis_sanity_{date_str}_{split}_batch_{bi + 1}.png"
+        out_path = f"{dataset_name}_sanity_{date_str}_{split}_batch_{bi + 1}.png"
         plt.savefig(out_path, dpi=150, bbox_inches="tight")
         plt.close()
         print(f"Saved: {out_path}")
