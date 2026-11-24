@@ -1,0 +1,4 @@
+interface:
+  display_name: "Query and Claim GCP TPUs"
+  short_description: "Find and safely acquire idle TPU capacity"
+  default_prompt: "Use $query-monitor-gcp-tpus to find or query a READY idle TPU, preferring Kristine TPUs,, validate storage locality, and check VFIO occupancy before launch."

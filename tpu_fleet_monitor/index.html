@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TPU fleet view</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07100f;
+      --panel: #0c1716;
+      --panel-2: #101d1b;
+      --line: #213331;
+      --line-strong: #35504b;
+      --text: #edf6f2;
+      --muted: #8da39d;
+      --mint: #6ee7b7;
+      --blue: #67b8ff;
+      --amber: #f4c66d;
+      --red: #ff8585;
+      --violet: #b9a1ff;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% -10%, rgba(45, 212, 191, .13), transparent 32%),
+        radial-gradient(circle at 95% 5%, rgba(103, 184, 255, .10), transparent 27%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .shell { width: min(100% - 32px, 1540px); margin: 0 auto; padding: 30px 0 64px; }
+    .topbar { display: flex; justify-content: space-between; gap: 28px; align-items: flex-start; }
+    .eyebrow { margin: 0 0 9px; color: var(--mint); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(30px, 4vw, 52px); line-height: 1; letter-spacing: -.045em; }
+    .subtitle { max-width: 780px; margin: 15px 0 0; color: #b6c8c3; font-size: 14px; line-height: 1.6; }
+    .header-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; align-items: center; }
+    .button, .timestamp {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 9px 12px;
+      background: rgba(12, 23, 22, .88);
+      color: var(--text);
+      font-size: 12px;
+    }
+    .button:hover { border-color: var(--line-strong); text-decoration: none; }
+    .button:disabled { opacity: .55; cursor: wait; }
+    .timestamp { color: var(--muted); line-height: 1.4; text-align: right; }
+
+    .safety-banner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 24px 0 16px;
+      border: 1px solid rgba(110, 231, 183, .3);
+      border-radius: var(--radius);
+      padding: 13px 16px;
+      background: rgba(19, 78, 65, .18);
+      color: #c9f8e5;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .safety-banner strong { color: var(--mint); }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; margin: 16px 0; }
+    .summary-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: linear-gradient(145deg, rgba(16, 29, 27, .98), rgba(9, 18, 17, .98));
+    }
+    .summary-card .label { display: block; color: var(--muted); font-size: 10px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+    .summary-card .value { display: block; margin-top: 7px; font-size: 29px; font-weight: 730; letter-spacing: -.04em; }
+    .summary-card .detail { display: block; margin-top: 3px; color: #9eb0ab; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .source-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 26px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .source-label { font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .pill, .state-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: max-content;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pill::before, .state-pill::before { width: 6px; height: 6px; border-radius: 50%; background: currentColor; content: ""; }
+    .healthy { color: var(--mint); background: rgba(52, 211, 153, .12); }
+    .info { color: var(--blue); background: rgba(96, 165, 250, .12); }
+    .warning { color: var(--amber); background: rgba(251, 191, 36, .12); }
+    .danger { color: var(--red); background: rgba(248, 113, 113, .12); }
+    .paused { color: var(--violet); background: rgba(167, 139, 250, .12); }
+    .neutral { color: #b3c0bc; background: rgba(148, 163, 184, .11); }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(240px, 2fr) repeat(4, minmax(125px, .8fr)) auto;
+      gap: 9px;
+      margin: 0 0 16px;
+    }
+    .control {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 11px;
+      color: var(--text);
+      background: var(--panel);
+      outline: none;
+    }
+    .control:focus { border-color: var(--mint); }
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 11px;
+      color: var(--muted);
+      background: var(--panel);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    section + section { margin-top: 34px; }
+    .section-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 12px; }
+    h2 { margin: 0; font-size: 19px; letter-spacing: -.02em; }
+    .section-note { color: var(--muted); font-size: 12px; }
+
+    .table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(10, 20, 19, .9); }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      padding: 11px 13px;
+      color: var(--muted);
+      background: #0d1917;
+      border-bottom: 1px solid var(--line-strong);
+      font-size: 9px;
+      letter-spacing: .1em;
+      text-align: left;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    td { padding: 11px 13px; border-bottom: 1px solid rgba(33, 51, 49, .7); vertical-align: top; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: rgba(110, 231, 183, .035); }
+    .name { max-width: 370px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; line-height: 1.45; }
+    .subtle { color: var(--muted); }
+    .error { max-width: 420px; color: #ffc0c0; line-height: 1.45; }
+    .nowrap { white-space: nowrap; }
+    .empty { min-height: 150px; display: grid; place-items: center; padding: 28px; color: var(--muted); text-align: center; }
+
+    @media (max-width: 1100px) {
+      .summary-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .controls .search { grid-column: span 2; }
+    }
+    @media (max-width: 700px) {
+      .shell { width: min(100% - 20px, 1540px); padding-top: 20px; }
+      .topbar { flex-direction: column; }
+      .header-actions { justify-content: flex-start; }
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .controls { grid-template-columns: 1fr; }
+      .controls .search { grid-column: auto; }
+      .safety-banner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Project-wide control-plane metadata</p>
+        <h1>TPU fleet view</h1>
+        <p class="subtitle">A separate, read-only view of every Cloud TPU VM and Queued Resource in the project, with an explicitly authorized one-time occupancy snapshot when available.</p>
+      </div>
+      <div class="header-actions">
+        <a class="button" href="http://127.0.0.1:8782">Kristine run monitor</a>
+        <div class="timestamp" id="timestamp">Waiting for first snapshot…</div>
+        <button class="button" id="refresh-button" type="button">Refresh metadata</button>
+      </div>
+    </header>
+
+    <div class="safety-banner">
+      <span><strong>Strictly read-only.</strong> No automatic SSH, lifecycle actions, firewall changes, signals, or mutation controls exist in this service. Guest activity is loaded only from a manually authorized one-time scan.</span>
+      <span id="project-label"></span>
+    </div>
+
+    <section class="summary-grid" id="summary-grid" aria-label="Project TPU summary">
+      <article class="summary-card"><span class="label">TPUs</span><span class="value">—</span></article>
+      <article class="summary-card"><span class="label">Ready</span><span class="value">—</span></article>
+      <article class="summary-card"><span class="label">Ready chips</span><span class="value">—</span></article>
+      <article class="summary-card"><span class="label">Observed busy</span><span class="value">—</span></article>
+      <article class="summary-card"><span class="label">Observed idle</span><span class="value">—</span></article>
+      <article class="summary-card"><span class="label">Queue pending</span><span class="value">—</span></article>
+      <article class="summary-card"><span class="label">Queue active</span><span class="value">—</span></article>
+      <article class="summary-card"><span class="label">Queue failed</span><span class="value">—</span></article>
+    </section>
+
+    <div class="source-strip" id="source-strip">
+      <span class="source-label">Data sources</span>
+      <span class="pill neutral">TPU VM list · waiting</span>
+      <span class="pill neutral">Queued Resources · waiting</span>
+      <span class="pill neutral">Manual activity snapshot · waiting</span>
+    </div>
+
+    <div class="controls">
+      <input class="control search" id="search" type="search" placeholder="Filter names, owners, shapes…" autocomplete="off">
+      <select class="control" id="zone-filter"><option value="">All zones</option></select>
+      <select class="control" id="shape-filter"><option value="">All shapes</option></select>
+      <select class="control" id="state-filter"><option value="">All states</option></select>
+      <select class="control" id="activity-filter"><option value="">All activity</option></select>
+      <label class="toggle"><input id="history-toggle" type="checkbox"> Include paused queue history</label>
+    </div>
+
+    <section>
+      <div class="section-title-row">
+        <h2>Queued Resources</h2>
+        <span class="section-note" id="queue-count"></span>
+      </div>
+      <div class="table-wrap" id="queue-table"><div class="empty">Loading queued-resource metadata…</div></div>
+    </section>
+
+    <section>
+      <div class="section-title-row">
+        <h2>TPU VM fleet</h2>
+        <span class="section-note" id="fleet-count"></span>
+      </div>
+      <div class="table-wrap" id="fleet-table"><div class="empty">Loading TPU VM metadata…</div></div>
+    </section>
+  </main>
+
+  <script>
+    const viewState = { snapshot: null, loading: false };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function relativeTime(value) {
+      if (!value) return "never";
+      const seconds = Math.max(0, Math.floor((Date.now() - new Date(value).getTime()) / 1000));
+      if (seconds < 5) return "just now";
+      if (seconds < 60) return `${seconds}s ago`;
+      if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+      if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+      return `${Math.floor(seconds / 86400)}d ago`;
+    }
+
+    function sourceTone(source) {
+      if (!source.last_success) return "neutral";
+      if (source.manual) return source.error ? "warning" : "info";
+      const age = (Date.now() - new Date(source.last_success).getTime()) / 1000;
+      return source.error || age > source.interval_seconds * 2.5 ? "warning" : "healthy";
+    }
+
+    function stateTone(state, category = "") {
+      if (category === "failed" || state === "UNHEALTHY" || state === "FAILED") return "danger";
+      if (category === "pending" || ["CREATING", "PROVISIONING", "REPAIRING"].includes(state)) return "warning";
+      if (category === "paused" || ["SUSPENDED", "SUSPENDING"].includes(state)) return "paused";
+      if (state === "READY" || state === "ACTIVE" || category === "active") return "healthy";
+      return "neutral";
+    }
+
+    function activityTone(status) {
+      if (status === "busy") return "warning";
+      if (status === "idle") return "healthy";
+      return "neutral";
+    }
+
+    function activityLabel(status) {
+      return ({ busy: "Busy", idle: "Idle", unknown: "Unknown", not_scanned: "Not scanned" })[status] ?? "Unknown";
+    }
+
+    function formatDate(value) {
+      if (!value) return "—";
+      return new Date(value).toLocaleString();
+    }
+
+    function currentFilters() {
+      return {
+        query: document.getElementById("search").value.trim().toLowerCase(),
+        zone: document.getElementById("zone-filter").value,
+        shape: document.getElementById("shape-filter").value,
+        state: document.getElementById("state-filter").value,
+        activity: document.getElementById("activity-filter").value,
+        history: document.getElementById("history-toggle").checked,
+      };
+    }
+
+    function matches(resource, filters, isQueue) {
+      const searchable = JSON.stringify(resource).toLowerCase();
+      if (filters.query && !searchable.includes(filters.query)) return false;
+      if (filters.zone && resource.zone !== filters.zone) return false;
+      const shapes = isQueue ? resource.accelerator_types : [resource.accelerator_type];
+      if (filters.shape && !shapes.includes(filters.shape)) return false;
+      if (filters.state && resource.state !== filters.state) return false;
+      if (!isQueue && filters.activity && resource.activity.status !== filters.activity) return false;
+      if (isQueue && !filters.history && resource.category === "paused") return false;
+      return true;
+    }
+
+    function renderSummary(summary) {
+      const cards = [
+        ["TPUs", summary.total_tpus, `${summary.zones} zones`],
+        ["Ready", summary.ready_tpus, `${summary.kristine_tpus} kristine`],
+        ["Ready chips", summary.ready_chips, "declared topology chips"],
+        ["Observed busy", summary.activity_busy, "one-time read-only scan"],
+        ["Observed idle", summary.activity_idle, "one-time read-only scan"],
+        ["Queue pending", summary.queue_pending, "waiting or provisioning"],
+        ["Queue active", summary.queue_active, "allocated queued resources"],
+        ["Queue failed", summary.queue_failed, `${summary.queue_paused} paused`],
+      ];
+      document.getElementById("summary-grid").innerHTML = cards.map(([label, value, detail]) => `
+        <article class="summary-card">
+          <span class="label">${escapeHtml(label)}</span>
+          <span class="value">${escapeHtml(value)}</span>
+          <span class="detail">${escapeHtml(detail)}</span>
+        </article>`).join("");
+    }
+
+    function renderSources(sources) {
+      const labels = { fleet: "TPU VM list", queue: "Queued Resources", activity: "Manual activity snapshot" };
+      document.getElementById("source-strip").innerHTML = `
+        <span class="source-label">Data sources</span>
+        ${Object.entries(labels).map(([key, label]) => {
+          const source = sources[key];
+          const detail = source.error ? `warning · ${relativeTime(source.last_success)}` : relativeTime(source.last_success);
+          const title = source.error ?? (source.manual ? "One-time snapshot; never polled automatically" : `Polls every ${source.interval_seconds}s`);
+          return `<span class="pill ${sourceTone(source)}" title="${escapeHtml(title)}">${label} · ${detail}</span>`;
+        }).join("")}`;
+    }
+
+    function updateSelect(id, values, placeholder) {
+      const select = document.getElementById(id);
+      const previous = select.value;
+      select.innerHTML = `<option value="">${escapeHtml(placeholder)}</option>${[...values].sort().map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join("")}`;
+      if ([...values].includes(previous)) select.value = previous;
+    }
+
+    function renderQueue(resources) {
+      const filters = currentFilters();
+      const visible = resources.filter(resource => matches(resource, filters, true));
+      document.getElementById("queue-count").textContent = `${visible.length} shown · ${resources.length} total`;
+      const container = document.getElementById("queue-table");
+      if (!visible.length) {
+        container.innerHTML = `<div class="empty">No queued resources match the current filters.</div>`;
+        return;
+      }
+      container.innerHTML = `<table>
+        <thead><tr><th>Queued resource</th><th>State</th><th>Shape</th><th>Zone</th><th>Request</th><th>Nodes</th><th>Created</th><th>Diagnostic</th></tr></thead>
+        <tbody>${visible.map(resource => `
+          <tr>
+            <td class="name">${escapeHtml(resource.name)}<div class="subtle">${escapeHtml(resource.owner)}</div></td>
+            <td><span class="state-pill ${stateTone(resource.state, resource.category)}">${escapeHtml(resource.state)}</span>${resource.state_initiator ? `<div class="subtle">${escapeHtml(resource.state_initiator)}</div>` : ""}</td>
+            <td class="nowrap">${escapeHtml(resource.accelerator_types.join(", "))}<div class="subtle">${escapeHtml(resource.chips)} chips</div></td>
+            <td class="nowrap">${escapeHtml(resource.zone)}</td>
+            <td>${escapeHtml(resource.capacity_mode)}</td>
+            <td>${escapeHtml(resource.nodes.length)}</td>
+            <td class="nowrap" title="${escapeHtml(formatDate(resource.create_time))}">${escapeHtml(relativeTime(resource.create_time))}</td>
+            <td class="error">${escapeHtml(resource.error_message ?? "—")}</td>
+          </tr>`).join("")}</tbody>
+      </table>`;
+    }
+
+    function renderFleet(resources) {
+      const filters = currentFilters();
+      const visible = resources.filter(resource => matches(resource, filters, false));
+      document.getElementById("fleet-count").textContent = `${visible.length} shown · ${resources.length} total`;
+      const container = document.getElementById("fleet-table");
+      if (!visible.length) {
+        container.innerHTML = `<div class="empty">No TPU VMs match the current filters.</div>`;
+        return;
+      }
+      container.innerHTML = `<table>
+        <thead><tr><th>TPU VM</th><th>Activity</th><th>Observed run</th><th>State</th><th>Health</th><th>Shape</th><th>Zone</th><th>Scheduling</th><th>Owner label</th><th>Created</th></tr></thead>
+        <tbody>${visible.map(resource => `
+          <tr>
+            <td class="name">${escapeHtml(resource.name)}</td>
+            <td><span class="state-pill ${activityTone(resource.activity.status)}">${escapeHtml(activityLabel(resource.activity.status))}</span>${resource.activity.inspected_at ? `<div class="subtle">${escapeHtml(relativeTime(resource.activity.inspected_at))}</div>` : ""}</td>
+            <td class="name">${resource.activity.runs.length ? resource.activity.runs.map(run => `<div title="${escapeHtml(run.command)}">${escapeHtml(run.user)} · ${escapeHtml(run.summary)}</div>`).join("") : `<span class="subtle">${resource.activity.error ? escapeHtml(resource.activity.error) : "—"}</span>`}</td>
+            <td><span class="state-pill ${stateTone(resource.state)}">${escapeHtml(resource.state)}</span></td>
+            <td><span class="state-pill ${resource.health === "HEALTHY" ? "healthy" : resource.health === "UNKNOWN" ? "neutral" : "danger"}">${escapeHtml(resource.health)}</span></td>
+            <td class="nowrap">${escapeHtml(resource.accelerator_type)}<div class="subtle">${escapeHtml(resource.chips)} chips</div></td>
+            <td class="nowrap">${escapeHtml(resource.zone)}</td>
+            <td>${escapeHtml(resource.scheduling)}</td>
+            <td>${escapeHtml(resource.owner)}</td>
+            <td class="nowrap" title="${escapeHtml(formatDate(resource.create_time))}">${escapeHtml(relativeTime(resource.create_time))}</td>
+          </tr>`).join("")}</tbody>
+      </table>`;
+    }
+
+    function renderTables() {
+      if (!viewState.snapshot) return;
+      renderQueue(viewState.snapshot.queued_resources);
+      renderFleet(viewState.snapshot.tpus);
+    }
+
+    function renderSnapshot(snapshot) {
+      viewState.snapshot = snapshot;
+      renderSummary(snapshot.summary);
+      renderSources(snapshot.sources);
+      document.getElementById("project-label").textContent = `Project ${snapshot.project_identifier}`;
+      document.getElementById("timestamp").innerHTML = `Snapshot ${relativeTime(snapshot.generated_at)}<br>${new Date(snapshot.generated_at).toLocaleTimeString()}`;
+      const zones = new Set([...snapshot.tpus, ...snapshot.queued_resources].map(item => item.zone));
+      const shapes = new Set([
+        ...snapshot.tpus.map(item => item.accelerator_type),
+        ...snapshot.queued_resources.flatMap(item => item.accelerator_types),
+      ]);
+      const states = new Set([...snapshot.tpus, ...snapshot.queued_resources].map(item => item.state));
+      const activities = new Set(snapshot.tpus.map(item => item.activity.status));
+      updateSelect("zone-filter", zones, "All zones");
+      updateSelect("shape-filter", shapes, "All shapes");
+      updateSelect("state-filter", states, "All states");
+      updateSelect("activity-filter", activities, "All activity");
+      renderTables();
+    }
+
+    async function fetchSnapshot() {
+      if (viewState.loading) return;
+      viewState.loading = true;
+      try {
+        const response = await fetch("/api/status", { cache: "no-store" });
+        if (!response.ok) throw new Error(`status ${response.status}`);
+        renderSnapshot(await response.json());
+      } catch (error) {
+        document.getElementById("timestamp").textContent = `API unavailable: ${error.message}`;
+      } finally {
+        viewState.loading = false;
+      }
+    }
+
+    async function requestRefresh() {
+      const button = document.getElementById("refresh-button");
+      button.disabled = true;
+      button.textContent = "Refreshing…";
+      try {
+        await fetch("/api/refresh", { method: "POST" });
+        setTimeout(fetchSnapshot, 1200);
+      } finally {
+        setTimeout(() => { button.disabled = false; button.textContent = "Refresh metadata"; }, 1700);
+      }
+    }
+
+    document.getElementById("refresh-button").addEventListener("click", requestRefresh);
+    for (const id of ["search", "zone-filter", "shape-filter", "state-filter", "activity-filter", "history-toggle"]) {
+      document.getElementById(id).addEventListener(id === "search" ? "input" : "change", renderTables);
+    }
+    fetchSnapshot();
+    setInterval(fetchSnapshot, 5000);
+  </script>
+</body>
+</html>
