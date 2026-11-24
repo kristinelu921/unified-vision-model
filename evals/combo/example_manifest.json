@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "id": "replace_with_dataset_record_id",
+      "image": "/mnt/klum/path/to/rgb.png",
+      "depth": "/mnt/klum/path/to/depth.npy",
+      "normal": "/mnt/klum/path/to/normal.npy",
+      "instances": [
+        {
+          "id": "object_a",
+          "category": "chair",
+          "mask": "/mnt/klum/path/to/object_a_mask.png",
+          "bbox": [120, 80, 96, 140]
+        },
+        {
+          "id": "object_b",
+          "category": "table",
+          "mask": "/mnt/klum/path/to/object_b_mask.png",
+          "bbox": [250, 130, 170, 90]
+        }
+      ]
+    }
+  ]
+}

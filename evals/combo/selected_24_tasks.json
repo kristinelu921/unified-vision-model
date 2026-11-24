@@ -1,0 +1,324 @@
+[
+  {
+    "id": "normal_except_primary_box",
+    "description": "Surface normals everywhere except object A's bounding box.",
+    "layers": [
+      {
+        "type": "normal",
+        "region": "outside_box",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "depth_except_primary_box",
+    "description": "Depth everywhere except object A's bounding box.",
+    "layers": [
+      {
+        "type": "depth",
+        "region": "outside_box",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "normal_only_primary_box",
+    "description": "Surface normals only inside object A's bounding box.",
+    "layers": [
+      {
+        "type": "normal",
+        "region": "box",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "depth_only_primary_box",
+    "description": "Depth only inside object A's bounding box.",
+    "layers": [
+      {
+        "type": "depth",
+        "region": "box",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "normal_only_primary_mask",
+    "description": "Surface normals only inside object A's segmentation mask.",
+    "layers": [
+      {
+        "type": "normal",
+        "region": "mask",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "depth_only_primary_mask",
+    "description": "Depth only inside object A's segmentation mask.",
+    "layers": [
+      {
+        "type": "depth",
+        "region": "mask",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "segment_primary_box_secondary",
+    "description": "Segment object A and draw a bounding box around object B.",
+    "layers": [
+      {
+        "type": "segment",
+        "region": "mask",
+        "role": "primary"
+      },
+      {
+        "type": "box",
+        "region": "box",
+        "role": "secondary"
+      }
+    ]
+  },
+  {
+    "id": "box_primary_segment_secondary",
+    "description": "Draw a bounding box around object A and segment object B.",
+    "layers": [
+      {
+        "type": "box",
+        "region": "box",
+        "role": "primary"
+      },
+      {
+        "type": "segment",
+        "region": "mask",
+        "role": "secondary"
+      }
+    ]
+  },
+  {
+    "id": "depth_primary_box_normal_secondary_mask",
+    "description": "Depth object A's box and normals object B's mask.",
+    "layers": [
+      {
+        "type": "depth",
+        "region": "box",
+        "role": "primary"
+      },
+      {
+        "type": "normal",
+        "region": "mask",
+        "role": "secondary"
+      }
+    ]
+  },
+  {
+    "id": "normal_primary_box_depth_secondary_mask",
+    "description": "Normals object A's box and depth object B's mask.",
+    "layers": [
+      {
+        "type": "normal",
+        "region": "box",
+        "role": "primary"
+      },
+      {
+        "type": "depth",
+        "region": "mask",
+        "role": "secondary"
+      }
+    ]
+  },
+  {
+    "id": "segment_primary_depth_box_minus_mask",
+    "description": "Segment object A; depth only inside object A's box but outside its mask.",
+    "layers": [
+      {
+        "type": "depth",
+        "region": "box_minus_mask",
+        "role": "primary"
+      },
+      {
+        "type": "segment",
+        "region": "mask",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "segment_primary_normal_box_minus_mask",
+    "description": "Segment object A; normals only inside object A's box but outside its mask.",
+    "layers": [
+      {
+        "type": "normal",
+        "region": "box_minus_mask",
+        "role": "primary"
+      },
+      {
+        "type": "segment",
+        "region": "mask",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "box_primary_depth_outside_box",
+    "description": "Draw object A's box and render depth only outside it.",
+    "layers": [
+      {
+        "type": "depth",
+        "region": "outside_box",
+        "role": "primary"
+      },
+      {
+        "type": "box",
+        "region": "box",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "box_primary_normal_outside_box",
+    "description": "Draw object A's box and render normals only outside it.",
+    "layers": [
+      {
+        "type": "normal",
+        "region": "outside_box",
+        "role": "primary"
+      },
+      {
+        "type": "box",
+        "region": "box",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "normal_except_primary_segment",
+    "description": "Surface normals everywhere except object A's segmentation mask.",
+    "layers": [
+      {
+        "type": "normal",
+        "region": "outside_mask",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "depth_except_primary_segment",
+    "description": "Depth everywhere except object A's segmentation mask.",
+    "layers": [
+      {
+        "type": "depth",
+        "region": "outside_mask",
+        "role": "primary"
+      }
+    ]
+  },
+  {
+    "id": "red_inside_primary_box_green_outside_box",
+    "description": "Color object A's bounding box red and everything outside it green, without drawing box lines.",
+    "layers": [
+      {
+        "type": "color",
+        "region": "outside_box",
+        "role": "primary",
+        "color": "green"
+      },
+      {
+        "type": "color",
+        "region": "box",
+        "role": "primary",
+        "color": "red"
+      }
+    ]
+  },
+  {
+    "id": "green_inside_primary_box_red_outside_box",
+    "description": "Color object A's bounding box green and everything outside it red, without drawing box lines.",
+    "layers": [
+      {
+        "type": "color",
+        "region": "outside_box",
+        "role": "primary",
+        "color": "red"
+      },
+      {
+        "type": "color",
+        "region": "box",
+        "role": "primary",
+        "color": "green"
+      }
+    ]
+  },
+  {
+    "id": "transparent_red_outside_primary_segment",
+    "description": "Overlay transparent red everywhere outside object A's segmentation mask, leaving object A as base RGB.",
+    "layers": [
+      {
+        "type": "color",
+        "region": "outside_mask",
+        "role": "primary",
+        "color": "red",
+        "alpha": 0.45
+      }
+    ]
+  },
+  {
+    "id": "transparent_red_inside_primary_segment",
+    "description": "Overlay transparent red inside object A's segmentation mask, leaving everything outside as base RGB.",
+    "layers": [
+      {
+        "type": "color",
+        "region": "mask",
+        "role": "primary",
+        "color": "red",
+        "alpha": 0.45
+      }
+    ]
+  },
+  {
+    "id": "bounding_box_primary",
+    "description": "Draw a neon bounding box around object A only.",
+    "layers": [
+      {
+        "role": "primary",
+        "region": "box",
+        "type": "box"
+      }
+    ]
+  },
+  {
+    "id": "segmentation_primary",
+    "description": "Overlay segmentation on object A only.",
+    "layers": [
+      {
+        "role": "primary",
+        "region": "mask",
+        "type": "segment"
+      }
+    ]
+  },
+  {
+    "id": "normal_primary_full",
+    "description": "Render the full image as a surface-normal map.",
+    "layers": [
+      {
+        "role": "primary",
+        "region": "full_image",
+        "type": "normal"
+      }
+    ]
+  },
+  {
+    "id": "depth_primary_full",
+    "description": "Render the full image as a depth map.",
+    "layers": [
+      {
+        "role": "primary",
+        "region": "full_image",
+        "type": "depth"
+      }
+    ]
+  }
+]

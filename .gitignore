@@ -1,6 +1,26 @@
+# Local data / media artifacts
 *.txt
 *.zip
 *.jpg
-*_tfds*
+*.png
+*.webp
 *.json
+*.pyc
+__pycache__/
+
+# Generated TFDS build/cache dirs (not the *.py builders)
+*_tfds/
+*_tfds*/
+
+# Local caches / runtime
 .hf-cache/
+.runtime/
+.venv*/
+.env
+env.json
+
+# Heavy local eval packs and sample renders (kept out of git)
+qual_picks*/
+evals/combo/sample_*/
+eval_runs/
+nvs_renders/
