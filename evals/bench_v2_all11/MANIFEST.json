@@ -1,0 +1,608 @@
+{
+  "models": {},
+  "shared": [],
+  "source_zip": "reports/baseline_implementations_2026-11-19/baseline_implementation_sources.zip",
+  "note": "Cleaned selected Bench v2 (all-11) evaluation runners from baseline_implementation_sources.zip",
+  "entrypoints": {
+    "visualcloze": [
+      "evals/bench_v2_all11/visualcloze/source/baseline/p2/visualcloze_p2_task_text.py",
+      "evals/bench_v2_all11/visualcloze/run_visualcloze_tests.py"
+    ],
+    "painter": [
+      "evals/bench_v2_all11/painter/painter_native.py",
+      "evals/bench_v2_all11/shared/depth_output_adapter.py"
+    ],
+    "vict": [
+      "evals/bench_v2_all11/vict/vict_native.py",
+      "evals/bench_v2_all11/vict/adaptation.py"
+    ],
+    "genlv": [
+      "evals/bench_v2_all11/genlv/genlv_runtime.py",
+      "evals/bench_v2_all11/genlv/genlv_test.py"
+    ],
+    "lavin_dit": [
+      "evals/bench_v2_all11/lavin_dit/lavin_dit_bench_v2.py"
+    ],
+    "promptdiffusion": [
+      "evals/bench_v2_all11/promptdiffusion/source_optimized/engine.py",
+      "evals/bench_v2_all11/promptdiffusion/run_tests_retry1.py"
+    ],
+    "relation_adapter": [
+      "evals/bench_v2_all11/relation_adapter/plan_val.json",
+      "evals/bench_v2_all11/relation_adapter/source/runtime_loader.py"
+    ],
+    "instamanip": [
+      "evals/bench_v2_all11/instamanip/instamanip_bench_v2.py"
+    ],
+    "improv": [
+      "evals/bench_v2_all11/improv/improv_cpu.py",
+      "evals/bench_v2_all11/shared/edge_contrast_adapter.py"
+    ],
+    "analogist": [
+      "evals/bench_v2_all11/analogist/analogist_q4_v5p16.py"
+    ],
+    "lvm": [
+      "evals/bench_v2_all11/lvm/lvm_bench_v2.py",
+      "evals/bench_v2_all11/lvm/lvm_runtime_config.py"
+    ],
+    "shared": [
+      "evals/bench_v2_all11/shared/bench_episode_v1.py",
+      "evals/bench_v2_all11/shared/selected_metric_backend.py"
+    ]
+  },
+  "files": [
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/improv_original_source/improv/modeling/__init__.py",
+      "repo_path": "evals/bench_v2_all11/improv/original_source/improv/modeling/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/improv_original_source/improv/modeling/meta_arch/__init__.py",
+      "repo_path": "evals/bench_v2_all11/improv/original_source/improv/modeling/meta_arch/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/improv_original_source/improv/modeling/meta_arch/modules.py",
+      "repo_path": "evals/bench_v2_all11/improv/original_source/improv/modeling/meta_arch/modules.py",
+      "bytes": 17059,
+      "sha256": "ecd7923207b7a7458160e973d5a2dd183129b3ec6bbdaee29aeee8279ac01825"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/improv_original_source/improv/modeling/meta_arch/utils.py",
+      "repo_path": "evals/bench_v2_all11/improv/original_source/improv/modeling/meta_arch/utils.py",
+      "bytes": 9793,
+      "sha256": "3e6a1170093a67fa4790d1184d191bff73c4b467f4dbb2d5f87d359552fbb8fd"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/improv_runner/episode_p1.py",
+      "repo_path": "evals/bench_v2_all11/improv/episode_p1.py",
+      "bytes": 1928,
+      "sha256": "a14413857bfb50f6be41b9bb023299ab030bed7b5a85170357c202905d36f320"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/improv_runner/improv_cpu.py",
+      "repo_path": "evals/bench_v2_all11/improv/improv_cpu.py",
+      "bytes": 5789,
+      "sha256": "1e829bc16af6002e50e86fafa1423a9a075116bdb174c5772c96d10a009f01d8"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/improv_runner/run_tests.py",
+      "repo_path": "evals/bench_v2_all11/improv/run_tests.py",
+      "bytes": 8747,
+      "sha256": "5a9079353589032652413989244041901c3ca59200d6a9e69baa0d784b9ac03f"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/lvm_runner/official/EasyLM/models/llama/llama_model.py",
+      "repo_path": "evals/bench_v2_all11/lvm/runner/official/EasyLM/models/llama/llama_model.py",
+      "bytes": 52860,
+      "sha256": "4250497679762193161e3d131b9716dacbf5da14cb13cb9d91e87eca49a5c19f"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/lvm_runner/run_tests_resume1.py",
+      "repo_path": "evals/bench_v2_all11/lvm/runner/run_tests_resume1.py",
+      "bytes": 9695,
+      "sha256": "4fcdea85e66f093f65fb09941cdbf05cad67bb47e9a4d0f97d8816ab4ae29f94"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/lvm_runner/runtime_compat_patch.json",
+      "repo_path": "evals/bench_v2_all11/lvm/runner/runtime_compat_patch.json",
+      "bytes": 518,
+      "sha256": "89a103985b5301d035c0d6763079624b24896a54e1dfd97a0404344e6b30d1f4"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/painter_runner/episode_p1.py",
+      "repo_path": "evals/bench_v2_all11/painter/episode_p1.py",
+      "bytes": 1928,
+      "sha256": "a14413857bfb50f6be41b9bb023299ab030bed7b5a85170357c202905d36f320"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/painter_runner/official/Painter/models_painter.py",
+      "repo_path": "evals/bench_v2_all11/painter/official/Painter/models_painter.py",
+      "bytes": 18942,
+      "sha256": "c9e9de03bab79cee287f4bf89e53b4c2221f018995c8e61e95c99bd449f94035"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/painter_runner/painter_compat.py",
+      "repo_path": "evals/bench_v2_all11/painter/painter_compat.py",
+      "bytes": 3849,
+      "sha256": "a17d9e72b540ba6027212ddf64da36fa32d2bdb143034728ec41f6762d9d159c"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/painter_runner/painter_native.py",
+      "repo_path": "evals/bench_v2_all11/painter/painter_native.py",
+      "bytes": 3938,
+      "sha256": "bd9053a745bd957e808011b0b8003e26454855de78946899f79b2f88ba685dc6"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/painter_runner/run_tests.py",
+      "repo_path": "evals/bench_v2_all11/painter/run_tests.py",
+      "bytes": 7227,
+      "sha256": "249c63ea21c385fa36da6693f41e233bff56bedbecf5dbf6f1a1a367d6d20176"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/promptdiffusion_runner/run_tests_retry1.py",
+      "repo_path": "evals/bench_v2_all11/promptdiffusion/run_tests_retry1.py",
+      "bytes": 9887,
+      "sha256": "55993b8e407efc1dbace521faf630891cf4359f26004aaebbe28ce9ea34eccb3"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/promptdiffusion_runner/source_optimized/cached_controlnet.py",
+      "repo_path": "evals/bench_v2_all11/promptdiffusion/source_optimized/cached_controlnet.py",
+      "bytes": 19409,
+      "sha256": "dfb63b0bee9a4e4e69f37d2a39f9f38500b1f852f45d624d704f16b4a21f7b56"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/promptdiffusion_runner/source_optimized/contracts.py",
+      "repo_path": "evals/bench_v2_all11/promptdiffusion/source_optimized/contracts.py",
+      "bytes": 7237,
+      "sha256": "b729bb9ebcc266aa3d532a890244f35785cf660cae6b0b33250334d8cde4f00b"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/promptdiffusion_runner/source_optimized/engine.py",
+      "repo_path": "evals/bench_v2_all11/promptdiffusion/source_optimized/engine.py",
+      "bytes": 6790,
+      "sha256": "154cf342fbba84d1d8210dbd91f53a924604b906a32b199e7c757c143431c05b"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/promptdiffusion_runner/source_optimized/frozen_assets.json",
+      "repo_path": "evals/bench_v2_all11/promptdiffusion/source_optimized/frozen_assets.json",
+      "bytes": 2355,
+      "sha256": "885caf4fa079060e1dc79efbf1aafbd585d03b17769f486844e4624a2719c205"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/promptdiffusion_runner/source_optimized/infer.py",
+      "repo_path": "evals/bench_v2_all11/promptdiffusion/source_optimized/infer.py",
+      "bytes": 13351,
+      "sha256": "b24b0e6a7cba292ed1094c14466414fdf7d497e522b5b46b7381ec873079b5b4"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/promptdiffusion_runner/source_optimized/prepare_inputs.py",
+      "repo_path": "evals/bench_v2_all11/promptdiffusion/source_optimized/prepare_inputs.py",
+      "bytes": 4641,
+      "sha256": "c3bae4dd837f431037ca7ca528974c8d45519920109b9fb825d4dc77f5d62eb1"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/promptdiffusion_runner/source_optimized/score_fresh.py",
+      "repo_path": "evals/bench_v2_all11/promptdiffusion/source_optimized/score_fresh.py",
+      "bytes": 9924,
+      "sha256": "bb0434658976fefa94caee87e135147dafd425c29a7326d2259e70944dc59134"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/analogist_selected/analogist_compat.py",
+      "repo_path": "evals/bench_v2_all11/analogist/analogist_compat.py",
+      "bytes": 2756,
+      "sha256": "0ed53237652213a1ab16ff05589358a0174e7fd1b4db787beaeb64456547e2b1"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/analogist_selected/analogist_loader.py",
+      "repo_path": "evals/bench_v2_all11/analogist/analogist_loader.py",
+      "bytes": 2415,
+      "sha256": "6bcdbb8aadfb95f9a42e26d7448bca5e07e9167b8a94f27c82e56539de55a0f6"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/analogist_selected/analogist_q4_v5p16.py",
+      "repo_path": "evals/bench_v2_all11/analogist/analogist_q4_v5p16.py",
+      "bytes": 27687,
+      "sha256": "8f80729fa26c87c4adab2104e9ccbe054df27377289a34676fcd66ec64a09453"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/analogist_selected/plan_val.json",
+      "repo_path": "evals/bench_v2_all11/analogist/plan_val.json",
+      "bytes": 251506,
+      "sha256": "d9fb7a07f05df46ba0879d71e857f16d509a27ea8c8070ba3bd94d0ea82ca073"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/analogist_selected/q2_analogist_bench_v2.py",
+      "repo_path": "evals/bench_v2_all11/analogist/q2_analogist_bench_v2.py",
+      "bytes": 26906,
+      "sha256": "b10095ab583417bc54e2d7ffb6ceff1d037f06bd15684834391ed79a9119aa25"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/instamanip_p3/apply_xla_diffusion_patch.py",
+      "repo_path": "evals/bench_v2_all11/instamanip/apply_xla_diffusion_patch.py",
+      "bytes": 2967,
+      "sha256": "a2c704c67d1f61405972be36a0b4711da5e8c18dd1fe01f828a96e671abda463"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/instamanip_p3/asset_contract.py",
+      "repo_path": "evals/bench_v2_all11/instamanip/asset_contract.py",
+      "bytes": 6115,
+      "sha256": "dee9d14667487370a47096bd6e1cfbc258aa6c5a3632d38afe3d1c8c4366c421"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/instamanip_p3/defaults.json",
+      "repo_path": "evals/bench_v2_all11/instamanip/defaults.json",
+      "bytes": 8488,
+      "sha256": "f8d552caf05a6d994416b69777d546359ac0811b65a5c091bea7a96bfdc405b8"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/instamanip_p3/instamanip_bench_v2.py",
+      "repo_path": "evals/bench_v2_all11/instamanip/instamanip_bench_v2.py",
+      "bytes": 62093,
+      "sha256": "f20ccf0957b9f24533e705df4190caecfb0549ce6f35b3e816abb319471c4e71"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/instamanip_p3/instamanip_loader.py",
+      "repo_path": "evals/bench_v2_all11/instamanip/instamanip_loader.py",
+      "bytes": 8564,
+      "sha256": "0a581391dcf719012399c1babf35a422bffe2d5b66f0dab56a00f9111114a233"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/instamanip_p3/validation_plan.json",
+      "repo_path": "evals/bench_v2_all11/instamanip/validation_plan.json",
+      "bytes": 213353,
+      "sha256": "d120a5c6d8ad3658219a2aa3d4c5fb61b697ca6eee1baed56704a8a31fd7921e"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/instamanip_p3/xla_dynamic_euler.py",
+      "repo_path": "evals/bench_v2_all11/instamanip/xla_dynamic_euler.py",
+      "bytes": 9345,
+      "sha256": "a6d004b48955f721eb14cebfe807745f3573384d75b6951a2b205dfa5da1ba66"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/instamanip_p3/xla_static_generation.py",
+      "repo_path": "evals/bench_v2_all11/instamanip/xla_static_generation.py",
+      "bytes": 21962,
+      "sha256": "b689024ae0633ee5e69754d5d2ebd63d8fa3abf34a01c51bead7f4d222711918"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/ARCHIVED_COMPLETION_VERIFIED.json",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/ARCHIVED_COMPLETION_VERIFIED.json",
+      "bytes": 4413,
+      "sha256": "baae797d71874013eedbdf53be86447ac2e0e4569e5726b79e84d991d2dba372"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/conversion_manifest.json",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/conversion_manifest.json",
+      "bytes": 857,
+      "sha256": "a148d8e50254b5a12f7c805026999c1ee89894df1717089d64124c833a1016e0"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/defaults.json",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/defaults.json",
+      "bytes": 2309,
+      "sha256": "0688bcf2ea60d3007fbc3ee46438cb5316881e842f40ac4461df578e0adffd59"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/lavin_dit_bench_v2.py",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/lavin_dit_bench_v2.py",
+      "bytes": 44372,
+      "sha256": "39e62db93bd36beb069fa41a1c8fca0fadbaf12d01b62d091b47e35e45f8ee15"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/lavin_dit_parallel.py",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/lavin_dit_parallel.py",
+      "bytes": 21929,
+      "sha256": "8f13e9b538a0d2517bad2ccd68a6c94f7a4ab523ac4c09946ef3dd04dc4cd6bb"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/official/lib/model/blocks.py",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/official/lib/model/blocks.py",
+      "bytes": 13952,
+      "sha256": "9464a51e01e83e63d5fe1a7221db1c6abf850366ded54392883d2ce7ebac8d56"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/official/lib/model/dit.py",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/official/lib/model/dit.py",
+      "bytes": 6749,
+      "sha256": "b5bfd6b8a0e894b75d62125749dd7f2eebbfe7f13e7b5841d11e83442033122c"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/official/lib/model/vae3d.py",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/official/lib/model/vae3d.py",
+      "bytes": 43324,
+      "sha256": "0ecbf7db16a5e212e526fe9e66385bbd5455aea9b647db5fa66209053b2110ce"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/tpu_compat.py",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/tpu_compat.py",
+      "bytes": 2860,
+      "sha256": "e57f140558559209f41113bae0ac53b204e564608544e1fe2f3203cc078a87a2"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lavin_p8_retry18/validation_plan.json",
+      "repo_path": "evals/bench_v2_all11/lavin_dit/validation_plan.json",
+      "bytes": 273276,
+      "sha256": "5c6e2797a2bfbfdcfa99d362b0cabb212affe2deb06766074827d27b27c66e51"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lvm/lvm_bench_v2.py",
+      "repo_path": "evals/bench_v2_all11/lvm/lvm_bench_v2.py",
+      "bytes": 27317,
+      "sha256": "1926c1a1f2d196a4dfd4836b3b134ff05ad581535bd74714dd906c324dc7e854"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lvm/lvm_runtime_config.py",
+      "repo_path": "evals/bench_v2_all11/lvm/lvm_runtime_config.py",
+      "bytes": 1981,
+      "sha256": "bf96532fc7dbddc3f6033df0437c7dced058882e9c5cc547d8cb5c4e2690c7a8"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/lvm/validation_plan.json",
+      "repo_path": "evals/bench_v2_all11/lvm/validation_plan.json",
+      "bytes": 177189,
+      "sha256": "8882008d4a88b07d2993b66e7c1ac7929d53953475a78faef1cd867831824492"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/plan_val.json",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/plan_val.json",
+      "bytes": 218577,
+      "sha256": "7f2dcd27982d561ed674ef95235879877a7840e11a5c047db1d7eb28efba3701"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/aggregate_validation.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/aggregate_validation.py",
+      "bytes": 8208,
+      "sha256": "c10bc036ad9a8806f64384e72a8e8836a0fd205ace271419a5d0dd9d9f9cdf5b"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/attention_processor_cached.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/attention_processor_cached.py",
+      "bytes": 7898,
+      "sha256": "3a5f16d5ca35f1e7ec2ef0aa59253692a411f5b1719089b3d92e4c160227f99e"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/baseline_archive/aggregate_corrected_v3.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/baseline_archive/aggregate_corrected_v3.py",
+      "bytes": 8597,
+      "sha256": "c81404093abc3db6a947d05c5570c4d6b50cf37c5836f24dd03bde492d796c9d"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/baseline_archive/relation_adapter_bench_v2.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/baseline_archive/relation_adapter_bench_v2.py",
+      "bytes": 41090,
+      "sha256": "c6a7b39db6a0aaf1e96f7846c0a20efe37fe889010d9ebde8c5f4b0dcf816be2"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/bench_episode_v1.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/bench_episode_v1.py",
+      "bytes": 9717,
+      "sha256": "efc614de568df9eaa907f5d946a257a8f1f7ef915d47e604d10f671b13e8d81b"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/cache_identity.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/cache_identity.py",
+      "bytes": 1436,
+      "sha256": "4cf195715965eab23ffda81faea2c8cedafaaddb1e4979dc73b574e3f7623bf1"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/conditioning_scope.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/conditioning_scope.py",
+      "bytes": 1240,
+      "sha256": "55393d99b8a54845fb63cac9cf808bac1c0aa8740a23a9e371bf1aeac9341dbb"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/execution_contract.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/execution_contract.py",
+      "bytes": 8209,
+      "sha256": "28bc65c6452a9bbfd06336fe458c918799889580c880a422bb5e626d85ff9130"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/finite_output.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/finite_output.py",
+      "bytes": 1330,
+      "sha256": "15fb099fe9e70726a7dee017e8a204fb70029b8284c2cc70f8a7e3b03b6040f1"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/instruction_policy.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/instruction_policy.py",
+      "bytes": 1829,
+      "sha256": "9a65df1aeb4f6f57fab7264d076284497334d271c6eff9c681b9f52fb8b9400b"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/prepare_inference_inputs.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/prepare_inference_inputs.py",
+      "bytes": 3422,
+      "sha256": "f4ecee4a66c3f2b56e7917942847582fc6fc0e121907acbf4bc038fad6158924"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/prepare_scoring_view.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/prepare_scoring_view.py",
+      "bytes": 6495,
+      "sha256": "4e677efa64574b4562de3b106a0123077f1c72a53ece595aae7e85ae207204d8"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/run_target_free.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/run_target_free.py",
+      "bytes": 13295,
+      "sha256": "ccca018de54381b5e776fd4a212bebf1ad6a586b81cf1c84e094088d41104e26"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/runtime_loader.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/runtime_loader.py",
+      "bytes": 6032,
+      "sha256": "f8fd382cd1d03f501a969e17959653d516a772eefdf178aec6aac414ab2635a8"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/scorer_preflight.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/scorer_preflight.py",
+      "bytes": 1297,
+      "sha256": "0c1ef14912a89c51fc1d6735b7dd3e3df94f3fab7ca309775a33d9400887e102"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/stage_scoring_assets.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/stage_scoring_assets.py",
+      "bytes": 3530,
+      "sha256": "e461c2b19e436c5aa107c3647bbfbc987cec05410f1fc2eba2eaad4b51cfa553"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/relation/source/target_free_episode.py",
+      "repo_path": "evals/bench_v2_all11/relation_adapter/source/target_free_episode.py",
+      "bytes": 1630,
+      "sha256": "e9920a41c97e7f68c11d151203bf2c6d986e9dab6bb9500fc6846133d5f02603"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/baseline/p2/task_prompts.json",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/baseline/p2/task_prompts.json",
+      "bytes": 2225,
+      "sha256": "0ec8baadca45ca93c17f8c992f11b1ec5f58c9ca36ddfc9db70284815520de42"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/baseline/p2/visualcloze_p2_task_text.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/baseline/p2/visualcloze_p2_task_text.py",
+      "bytes": 25499,
+      "sha256": "5b13ab08885d48b20cf91c457f6ff8f960e788238bfb24a05106a95613162912"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/__init__.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/__init__.py",
+      "bytes": 1070,
+      "sha256": "f967b73effa7eeb0dc7f0862e22883c5297c53e2ed0a4fed6f65dbb788d17e7e"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/edges_bsds_v1.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/edges_bsds_v1.py",
+      "bytes": 7328,
+      "sha256": "f7f3f8f64f1bec20375e342268535089a3cd9013071fb34c4790a5ce517e5c5e"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/edges_bsds_v2.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/edges_bsds_v2.py",
+      "bytes": 4186,
+      "sha256": "ac462f745d98a192864dd9de5ebeeefd22d95e73f94db1877a11fc4fae80007a"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/gt_v1.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/gt_v1.py",
+      "bytes": 7931,
+      "sha256": "3baab87676f1ec84534d22609845b07fc962b814d0de4e6decf2247b5c83c724"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/metrics_readout_v2.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/metrics_readout_v2.py",
+      "bytes": 4426,
+      "sha256": "d8f2bb0a53da91b875a9c566e01633df1dea38e3dea457736c2464b3287177cc"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/metrics_v1.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/metrics_v1.py",
+      "bytes": 30163,
+      "sha256": "4c6010be787bfb0b9dd415de3414fcedd5b7ae1f0806f07bf983ea15acbdf9cb"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/postprocess_v1.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/postprocess_v1.py",
+      "bytes": 11577,
+      "sha256": "dcb62b614fdf764e46754602714077ea60b8b4abc97196431a28b4a5e06aaedd"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/postprocess_v2.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/postprocess_v2.py",
+      "bytes": 4062,
+      "sha256": "7ca4bb39c4850d3c9620d8e5a131271b063291083ee2cfc40b398bcd20cc2098"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/protocol_v1.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/protocol_v1.py",
+      "bytes": 7955,
+      "sha256": "2d8a72034245d9e6f95a8ce98c342cddaa96ac8b6b85d411ef2ae7a551f2b910"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/scenes_v1.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/scenes_v1.py",
+      "bytes": 1881,
+      "sha256": "30c9f98986e1358f476810d33c15952f0c9e496abb0f61c16787919cbaab3d1c"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/recovered/visualcloze_recovery/source/scorer_snapshot/jflux2/fasteval/eval_v2/score_v1.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/source/scorer_snapshot/jflux2/fasteval/eval_v2/score_v1.py",
+      "bytes": 8098,
+      "sha256": "f6fd4a6ff99582acbc3a6077c558415c4d1fa1ebb5f033d16ab09bc75b159c8e"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/run_visualcloze_tests.py",
+      "repo_path": "evals/bench_v2_all11/visualcloze/run_visualcloze_tests.py",
+      "bytes": 9929,
+      "sha256": "1d03b3c22e1ef82c80474d297873bb2dd5e69c8e87f8cc11b8cbaa960686dac2"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/runner/genlv_test.py",
+      "repo_path": "evals/bench_v2_all11/genlv/genlv_test.py",
+      "bytes": 12602,
+      "sha256": "73544bf8ebc121a81ad400d1e653aaffec21bb0a234d951e21c8c241d0dc1469"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/runner/source/official/extended_version/models/xrestormer_prompt_crossattn_wores.py",
+      "repo_path": "evals/bench_v2_all11/genlv/official/extended_version/models/xrestormer_prompt_crossattn_wores.py",
+      "bytes": 32302,
+      "sha256": "335170a288a224b181b90b579d4321af749a4da7e3f1d8afc181f10cbbc29bac"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/runner/source/optimized/genlv_runtime.py",
+      "repo_path": "evals/bench_v2_all11/genlv/genlv_runtime.py",
+      "bytes": 6457,
+      "sha256": "641025a1c6a56f896b7a0fe809256bcf6b6ceed0a889a2b80f5e53923bbebebd"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/runner/tools/bench_episode_v1.py",
+      "repo_path": "evals/bench_v2_all11/shared/bench_episode_v1.py",
+      "bytes": 9717,
+      "sha256": "efc614de568df9eaa907f5d946a257a8f1f7ef915d47e604d10f671b13e8d81b"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/selected_metric_backend.py",
+      "repo_path": "evals/bench_v2_all11/shared/selected_metric_backend.py",
+      "bytes": 5671,
+      "sha256": "6f0fea22ddb0756bce67c1ae611aada9a7170e461d1aee26274433a1879fa37f"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/vict_runner/adaptation.py",
+      "repo_path": "evals/bench_v2_all11/vict/adaptation.py",
+      "bytes": 5224,
+      "sha256": "c65f46fb8c25835a985542a8f912ce628daf9c6f1596771a6da6f98ff82603f1"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/vict_runner/run_tests.py",
+      "repo_path": "evals/bench_v2_all11/vict/run_tests.py",
+      "bytes": 9041,
+      "sha256": "9d480450a02655307e6c9b4ad5fc80be90e6f74a784e72d1fa4305a36c3ef1d9"
+    },
+    {
+      "zip_path": "workspace/eval_runs/2026-11-10/bench_v2_all11_test/vict_runner/vict_native.py",
+      "repo_path": "evals/bench_v2_all11/vict/vict_native.py",
+      "bytes": 9168,
+      "sha256": "563bcecd89ca8a23084dc334f951a91210c729b2f9e3bfe5940117c5e79c2a93"
+    },
+    {
+      "zip_path": "workspace/visualcloze-results-site/dist/bench-v2-signed-depth/signed_depth_metric.py",
+      "repo_path": "evals/bench_v2_all11/shared/signed_depth_metric.py",
+      "bytes": 1614,
+      "sha256": "0dda801d349f87ec2a09b09b818c98917372e3687a6849cb3250d7e3ff92c4b9"
+    },
+    {
+      "zip_path": "workspace/visualcloze-results-site/scripts/depth_output_adapter.py",
+      "repo_path": "evals/bench_v2_all11/shared/depth_output_adapter.py",
+      "bytes": 1218,
+      "sha256": "b7283b8e45263fb6952fcbb0673d3578173f88db155c5329ff43f02d38398b8d"
+    },
+    {
+      "zip_path": "workspace/visualcloze-results-site/scripts/edge_contrast_adapter.py",
+      "repo_path": "evals/bench_v2_all11/shared/edge_contrast_adapter.py",
+      "bytes": 644,
+      "sha256": "ca93b7ed369ada346c373949cb971afcbf67758a3c3af7346210ce48c77bb26c"
+    }
+  ],
+  "file_count": 92
+}

@@ -1,0 +1,27 @@
+{
+  "converted": {
+    "lavin_dit.bf16.safetensors": {
+      "bytes": 6798007216,
+      "sha256": "bba27654d882641f6dde683c0ff07b698d07a4d9c4d9bd6bec6050f204199cee",
+      "tensors": 502
+    },
+    "stvae.bf16.pt": {
+      "bytes": 534531387,
+      "sha256": "4a219a05e273906b3979bbd2a149dab9c13257ee606bf8f4c7be3609da1ac902",
+      "tensors": 582
+    }
+  },
+  "dtype": "bfloat16 for floating tensors; integral tensors unchanged",
+  "schema": "lvm.external_eval.lavin_dit.tpu_weights.v1",
+  "source": {
+    "lavin_dit.safetensors": {
+      "bytes": 13595959128,
+      "sha256": "9e6074490dfde9e1ad2c814503b31889952c9b60a17667eef791e7ea47a4b2f3"
+    },
+    "stvae.pt": {
+      "bytes": 1068865830,
+      "sha256": "d8305e48b3fe83f55a90d3fe00791ae87841a03b4b6872cb8924dd65b6a8dbff"
+    }
+  },
+  "source_revision": "908f27447c65a95ba480ead9ef30f59965817593"
+}

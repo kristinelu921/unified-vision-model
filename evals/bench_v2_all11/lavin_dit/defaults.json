@@ -1,0 +1,61 @@
+{
+  "schema": "lavin_dit_bench_v2_native_p8_defaults_v1",
+  "model": {
+    "name": "LaVin-DiT",
+    "source_repository": "https://github.com/DerrickWang005/LaVin-DiT.git",
+    "source_commit": "f3728580115a4efbcd38d2279f1dbd868297b05e",
+    "weights_repository": "DerrickWang005/LaVin-DiT",
+    "weights_revision": "908f27447c65a95ba480ead9ef30f59965817593",
+    "source_license_status": "No root LICENSE file visible at the pinned official source commit; do not infer a repository-wide license from weight metadata.",
+    "weights_license_metadata": "MIT",
+    "source_weights": {
+      "lavin_dit.safetensors": {
+        "bytes": 13595959128,
+        "sha256": "9e6074490dfde9e1ad2c814503b31889952c9b60a17667eef791e7ea47a4b2f3"
+      },
+      "stvae.pt": {
+        "bytes": 1068865830,
+        "sha256": "d8305e48b3fe83f55a90d3fe00791ae87841a03b4b6872cb8924dd65b6a8dbff"
+      }
+    },
+    "converted_weights": {
+      "lavin_dit.bf16.safetensors": {
+        "bytes": 6798007216,
+        "sha256": "bba27654d882641f6dde683c0ff07b698d07a4d9c4d9bd6bec6050f204199cee"
+      },
+      "stvae.bf16.pt": {
+        "bytes": 534531387,
+        "sha256": "4a219a05e273906b3979bbd2a149dab9c13257ee606bf8f4c7be3609da1ac902"
+      }
+    }
+  },
+  "benchmark": {
+    "manifest_sha256": "89f2501aa722cd121da12e33a24ac9037d5cf50df7627911b7f6ce22fcd6c49d",
+    "pack_uri_root": "gs://kmh-gcp-us-central2/data/xtiange/mt_eval_packs",
+    "packs": 27,
+    "validation_queries": 221,
+    "test_queries": 17511,
+    "queries": 17732,
+    "phase_isolation": "separate immutable validation and test plans/results",
+    "test_gate": "hash-pinned corrected-V3 validation receipt required before TEST inference",
+    "episode_seed": 42,
+    "frozen_p": 8,
+    "condition": "real"
+  },
+  "inference": {
+    "backend_label": "PyTorch/XLA TPU-native; CUDA numerical parity is not claimed",
+    "dtype": "bfloat16",
+    "height": 512,
+    "width": 512,
+    "steps": 20,
+    "solver": "released fixed-grid Euler",
+    "cfg_scale": 1.5,
+    "model_seed_per_query": 0,
+    "score_resize": "Pillow LANCZOS 512x512 to 256x256"
+  },
+  "scoring": {
+    "protocol": "bench_v2_PP2_CSA_seed1_AP_FIRST_v1",
+    "release_manifest_sha256": "bd08e05f1d0e9dd077db683f4f124ac49a2c45cd0ec5728653bd1ad66cc13792",
+    "readout": "LaVin-DiT@native_p8"
+  }
+}
