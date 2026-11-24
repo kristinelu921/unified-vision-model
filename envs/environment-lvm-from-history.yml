@@ -1,0 +1,7 @@
+name: lvm
+channels:
+  - conda-forge
+  - nodefaults
+  - defaults
+dependencies:
+  - python=3.12

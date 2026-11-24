@@ -1,0 +1,18 @@
+name: lvm310
+channels:
+  - conda-forge
+  - nodefaults
+  - defaults
+dependencies:
+  - python=3.10
+  - nodejs
+variables:
+  KLUM_CACHE_HOME: /mnt/klum/cache
+  HF_HOME: /mnt/klum/cache/huggingface
+  HF_DATASETS_CACHE: /mnt/klum/cache/huggingface/datasets
+  HUGGINGFACE_HUB_CACHE: /mnt/klum/cache/huggingface/hub
+  TRANSFORMERS_CACHE: /mnt/klum/cache/huggingface/transformers
+  TORCH_HOME: /mnt/klum/cache/torch
+  TFDS_DATA_DIR: /mnt/klum/cache/tfds
+  PIP_CACHE_DIR: /mnt/klum/cache/pip
+  TMPDIR: /mnt/klum/cache/tmp
